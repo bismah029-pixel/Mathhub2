@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- JSXGraph -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css">
+<script src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+    <!-- Left Logo -->
+    <a class="navbar-brand fw-bold" href="#">
+      🧮 MathSolveHub
+    </a>
+
+    <!-- Toggle Button (Tablet & Mobile) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mathNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="mathNavbar">
+
+      <!-- Middle Menu -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Problem Solve</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Learn</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Right Side Button -->
+      <div class="d-flex">
+        <a href="#" class="btn btn-warning fw-semibold">
+          Get Started
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <section class="hero">
+  <div class="hero-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="hero-text">
+      <h1>Master Mathematics<br><span>with Clarity.</span></h1>
+      <p>
+        From Algebra to Calculus, we make complex equations simple
+        through interactive visualizations and step-by-step solutions.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#learn" class="btn primary">Start Learning</a>
+        <a href="#teachers" class="btn secondary">For Teachers</a>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="hero-visual">
+      <h3>Interactive Math Sandbox</h3>
+      <canvas id="graphCanvas" width="350" height="250"></canvas>
+
+      <label>
+        Adjust Slope (m):
+        <input type="range" min="-5" max="5" value="1" step="0.1" id="slope">
+      </label>
+    </div>
+
+  </div>
+</section>
+
+
+  </div>
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Topics Bar</title>
+
+<style>
+/* ===== Root Colors ===== */
+:root {
+  --primary: #2563eb;
+  --border: #e5e7eb;
+  --bg-light: #f8fafc;
+}
+
+/* ===== Container ===== */
+.topics-wrapper {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Topics Bar ===== */
+.topics-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+
+/* ===== Buttons ===== */
+.topic-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.topic-btn:hover {
+  background: var(--bg-light);
+}
+
+/* ===== Active Button (Pressed Look) ===== */
+.topic-btn.active {
+  background: #f0f0f0;
+  border-color: var(--primary);
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+  transform: translateY(1px);
+}
+
+/* ===== Solution Box ===== */
+.solution-box {
+  margin-top: 25px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== Fade Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Math Styling ===== */
+.math {
+  font-family: "Cambria Math", serif;
+  font-size: 1.05rem;
+}
+
+.math strong {
+  color: var(--primary);
+}
+</style>
+</head>
+
+<body>
+
+<div class="topics-wrapper">
+
+  <!-- Topics Navigation Bar -->
+  <div class="topics-bar">
+    <button class="topic-btn active" onclick="showSolution('algebra', this)">Algebra</button>
+    <button class="topic-btn" onclick="showSolution('geometry', this)">Geometry</button>
+    <button class="topic-btn" onclick="showSolution('trigonometry', this)">Trigonometry</button>
+    <button class="topic-btn" onclick="showSolution('calculus', this)">Calculus</button>
+    <button class="topic-btn" onclick="showSolution('number', this)">Number Theory</button>
+    <button class="topic-btn" onclick="showSolution('probability', this)">Probability</button>
+    <button class="topic-btn" onclick="showSolution('statistics', this)">Statistics</button>
+  </div>
+
+  <!-- Solution Preview -->
+  <div id="solutionBox" class="solution-box math">
+    <p><strong>Solve for x:</strong> 2x + 5 = 15</p>
+    <p>2x = 10 → <strong>x = 5</strong></p>
+  </div>
+
+</div>
+
+<script>
+const solutions = {
+  algebra: `
+    <p><strong>Solve for x:</strong> 2x + 5 = 15</p>
+    <p>2x = 10 → <strong>x = 5</strong></p>
+  `,
+  geometry: `
+    <p><strong>Find Area of a Circle:</strong> A = πr²</p>
+    <p>If r = 3 → A = 9π ≈ <strong>28.27</strong></p>
+  `,
+  trigonometry: `
+    <p><strong>Find sin(30°):</strong></p>
+    <p>Using the unit circle → <strong>0.5</strong></p>
+  `,
+  calculus: `
+    <p><strong>Derivative of:</strong> f(x) = x²</p>
+    <p>f′(x) = <strong>2x</strong></p>
+  `,
+  number: `
+    <p><strong>GCD of 12 and 18:</strong></p>
+    <p><strong>GCD = 6</strong></p>
+  `,
+  probability: `
+    <p><strong>Odds of rolling a 4:</strong></p>
+    <p>P(4) = <strong>1/6 ≈ 16.7%</strong></p>
+  `,
+  statistics: `
+    <p><strong>Mean of {2, 4, 9}:</strong></p>
+    <p>(2 + 4 + 9) / 3 = <strong>5</strong></p>
+  `
+};
+
+function showSolution(topic, btn) {
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const box = document.getElementById('solutionBox');
+  box.style.opacity = 0;
+
+  setTimeout(() => {
+    box.innerHTML = solutions[topic];
+    box.style.animation = 'none';
+    box.offsetHeight; // reset animation
+    box.style.animation = 'fadeIn 0.3s ease forwards';
+  }, 150);
+}
+</script>
+
+ <div class="solve-bar">
+  <span class="camera-icon">📷</span>
+  <input 
+    type="text" 
+    placeholder="Enter your math problem here (e.g., solve 3x + 5 = 11 or find the derivative of sin(x))"
+  />
+  <button class="solve-btn">Solve</button>
+</div>
+
+<div class="quick-tags">
+  <span>Factor x² − 4</span>
+  <span>Integral of 2x</span>
+  <span>Simplify 4/8</span>
+</div>
+   <div class="reflection">
+  <strong>Problem:</strong> <span id="latex-problem">3x + 5 = 11</span>
+</div>
+<div class="thinking">
+  <div class="loader"></div>
+  <p>Breaking down steps...</p>
+</div>
+<div class="solution-card">
+  <details open>
+    <summary>Step 1: Move constants</summary>
+    <p>Subtract 5 from both sides.</p>
+  </details>
+
+  <details>
+    <summary>Step 2: Simplify</summary>
+    <p>3x = 6</p>
+  </details>
+
+  <details>
+    <summary>Step 3: Solve</summary>
+    <p>x = 2</p>
+  </details>
+</div>
+<label class="eli5-toggle">
+  <input type="checkbox" id="eli5">
+  Explain like I’m 5
+</label>
+<section class="quick-learn">
+  <h2>Quick Learn</h2>
+  <p class="section-subtitle">Understand the basics of each math topic in seconds.</p>
+
+  <div class="learn-grid">
+
+    <div class="learn-card">
+      <div class="card-header algebra">Algebra</div>
+      <div class="card-body">
+        The part of math where we use letters like <strong>x</strong> and <strong>y</strong> to represent unknown numbers and solve balanced equations.
+      </div>
+      <div class="card-footer">
+        <a href="algebra.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header geometry">Geometry</div>
+      <div class="card-body">
+        The study of shapes, sizes, and space — from flat squares and circles to complex 3D structures.
+      </div>
+      <div class="card-footer">
+        <a href="geometry.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header trigo">Trigonometry</div>
+      <div class="card-body">
+        A branch of math that focuses on relationships between the sides and angles of triangles.
+      </div>
+      <div class="card-footer">
+        <a href="trigonometry.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header calculus">Calculus</div>
+      <div class="card-body">
+        The study of continuous change — how things grow (derivatives) and how they add up (integrals).
+      </div>
+      <div class="card-footer">
+        <a href="calculus.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header number">Number Theory</div>
+      <div class="card-body">
+        Often called the Queen of Mathematics, it studies the properties and patterns of whole numbers.
+      </div>
+      <div class="card-footer">
+        <a href="number-theory.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header probability">Probability</div>
+      <div class="card-body">
+        Measures how likely an event is to happen, from 0 (impossible) to 1 (certain).
+      </div>
+      <div class="card-footer">
+        <a href="probability.html">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="learn-card">
+      <div class="card-header statistics">Statistics</div>
+      <div class="card-body">
+        The science of collecting and analyzing data to discover patterns and trends.
+      </div>
+      <div class="card-footer">
+        <a href="statistics.html">Learn More →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="about-section">
+  <div class="about-container">
+    <h2>About MathSolveHub</h2>
+    <p>
+      MathSolveHub is a simple and friendly math learning platform designed to help
+      students understand math step by step — not just get answers.
+    </p>
+    <p>
+      From basic algebra to calculus, we explain problems in clear language,
+      with logic that actually makes sense.
+    </p>
+  </div>
+</section>
+<section class="contact-section">
+  <h2>Contact Us</h2>
+  <p class="contact-subtitle">
+    Have a question or suggestion? We'd love to hear from you.
+  </p>
+
+  <form class="contact-form">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+<footer class="footer">
+  <p>© 2026 MathSolveHub. All rights reserved.</p>
+</footer>
+
+
+
+
+</body>
+</html>
